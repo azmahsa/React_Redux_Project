@@ -7,19 +7,21 @@ import { productListAction } from "../action/productAction";
 
 const Home = () => {
   const dispatch = useDispatch();
+
   const productList = useSelector((state) => state.productList);
 
   const { loading, products } = productList;
 
+
   useEffect(() => {
-    dispatch(productListAction);
+    dispatch(productListAction());
   }, [dispatch]);
 
   return (
     <div>
       <h1>محصولات</h1>
       {loading ? (
-        <h2>در حال دریافت محصولات...</h2>
+        <h2>در حال دریافت محصولات....</h2>
       ) : (
         <Row>
           {products.map((item) => {
@@ -34,5 +36,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;
