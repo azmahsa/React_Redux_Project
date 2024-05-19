@@ -1,30 +1,27 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, ListGroup, Image, Button, Card } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
-import { addTocart, removeFromCart } from '../action/cartAction'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { addTocart, removeFromCart } from "../action/cartAction";
 
 const Cart = () => {
-  const productId = useParams()
+  let productId = useParams();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart)
-  const { cartItems } = cart
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
 
-  console.log(cartItems)
-  console.log(productId)
   useEffect(() => {
-    if (productId) {
-      dispatch(addTocart(productId))
-    }
-  }, [dispatch, productId])
+    dispatch(addTocart(productId.id));
+  }, [dispatch, productId.id]);
 
-
-
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+  };
   return (
     <div>
-    {/* <Row>
+      <Row>
         <Col md={8}>
           <h2>سبد خرید</h2>
           {cartItems.length === 0 ? (
@@ -63,10 +60,9 @@ const Cart = () => {
             </ListGroup>
           </Card>
         </Col>
-      </Row> */} 
-    
+      </Row>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
